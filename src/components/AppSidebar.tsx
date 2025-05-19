@@ -52,7 +52,7 @@ export function AppSidebar() {
     >
       <div className="p-4 flex items-center justify-between border-b">
         {!isCollapsed && (
-          <div className="text-xl font-bold text-purple-700">RegulPro</div>
+          <div className="text-xl font-bold text-purple-700">Maywa</div>
         )}
         <SidebarTrigger className="ml-auto" />
       </div>
