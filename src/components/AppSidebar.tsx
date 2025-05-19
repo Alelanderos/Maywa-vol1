@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { 
   Sidebar, 
@@ -25,7 +24,8 @@ import {
 } from "lucide-react";
 
 export function AppSidebar() {
-  const { collapsed } = useSidebar();
+  const sidebar = useSidebar();
+  const isCollapsed = sidebar.state === "collapsed";
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -47,11 +47,11 @@ export function AppSidebar() {
 
   return (
     <Sidebar
-      className={`border-r transition-all duration-300 ${collapsed ? "w-16" : "w-60"}`}
-      collapsible
+      className={`border-r transition-all duration-300 ${isCollapsed ? "w-16" : "w-60"}`}
+      collapsible="icon"
     >
       <div className="p-4 flex items-center justify-between border-b">
-        {!collapsed && (
+        {!isCollapsed && (
           <div className="text-xl font-bold text-purple-700">RegulPro</div>
         )}
         <SidebarTrigger className="ml-auto" />
@@ -60,7 +60,7 @@ export function AppSidebar() {
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs uppercase font-semibold text-gray-500 px-3 py-2">
-            {!collapsed && "Main Navigation"}
+            {!isCollapsed && "Main Navigation"}
           </SidebarGroupLabel>
           
           <SidebarGroupContent>
@@ -69,8 +69,8 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild className="w-full">
                     <NavLink to={item.url} className={getNavCls}>
-                      <item.icon className={`h-5 w-5 ${!collapsed ? "mr-3" : ""}`} />
-                      {!collapsed && <span>{item.title}</span>}
+                      <item.icon className={`h-5 w-5 ${!isCollapsed ? "mr-3" : ""}`} />
+                      {!isCollapsed && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -79,9 +79,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         
-        <SidebarGroup defaultOpen={true}>
+        <SidebarGroup>
           <SidebarGroupLabel className="text-xs uppercase font-semibold text-gray-500 px-3 py-2">
-            {!collapsed && "Regulatory"}
+            {!isCollapsed && "Regulatory"}
           </SidebarGroupLabel>
           
           <SidebarGroupContent>
@@ -89,8 +89,8 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="w-full">
                   <NavLink to="/nom-051" className={getNavCls}>
-                    <BookCheck className={`h-5 w-5 ${!collapsed ? "mr-3" : ""}`} />
-                    {!collapsed && <span>NOM-051</span>}
+                    <BookCheck className={`h-5 w-5 ${!isCollapsed ? "mr-3" : ""}`} />
+                    {!isCollapsed && <span>NOM-051</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -98,8 +98,8 @@ export function AppSidebar() {
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="w-full">
                   <NavLink to="/cofepris" className={getNavCls}>
-                    <CheckSquare className={`h-5 w-5 ${!collapsed ? "mr-3" : ""}`} />
-                    {!collapsed && <span>COFEPRIS</span>}
+                    <CheckSquare className={`h-5 w-5 ${!isCollapsed ? "mr-3" : ""}`} />
+                    {!isCollapsed && <span>COFEPRIS</span>}
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
