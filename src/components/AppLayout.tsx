@@ -12,7 +12,11 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
-        <ThemeProvider>
+        <ThemeProvider attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange 
+            >
         <AppSidebar />
         <div className="flex-1 overflow-y-auto">
           <header className="h-16 border-b flex items-center px-6">
