@@ -10,6 +10,7 @@ interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   return (
+     <html lang="en" suppressHydrationWarning>
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
         <ThemeProvider attribute="class"
@@ -29,6 +30,7 @@ export function AppLayout({ children }: AppLayoutProps) {
         </ThemeProvider>
       </div>
     </SidebarProvider>
+    </html>
   );
 }
 
