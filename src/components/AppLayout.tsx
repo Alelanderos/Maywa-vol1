@@ -2,7 +2,12 @@
 import { ReactNode } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import AppSidebar from "./AppSidebar";
+<<<<<<< HEAD
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { ModeToggle } from "./ThemeToggle";
+=======
 import { ThemeProvider } from "@/components/providers/ThemeProviders";
+>>>>>>> bc1cec65fccfb6c8c511409a174038c6f35dbc62
 
 interface AppLayoutProps {
   children: ReactNode;
