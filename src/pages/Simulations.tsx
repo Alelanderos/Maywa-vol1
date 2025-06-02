@@ -1,7 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity, Play, TrendingUp, Target, AlertCircle, CheckCircle, Clock, Zap } from "lucide-react";
+import { NewSimulationDialog } from "@/components/NewSimulationDialog";
 
 const Simulations = () => {
   return (
@@ -11,7 +11,7 @@ const Simulations = () => {
           <Activity className="h-8 w-8 text-blue-600" />
           <h1 className="text-3xl font-bold text-gray-800">Simulations</h1>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700">New Simulation</Button>
+        <NewSimulationDialog />
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
