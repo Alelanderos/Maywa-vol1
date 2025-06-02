@@ -20,7 +20,8 @@ import {
   Calendar,
   CheckSquare,
   ListTodo,
-  BookCheck
+  BookCheck,
+  Activity
 } from "lucide-react";
 
 export function AppSidebar() {
@@ -31,6 +32,7 @@ export function AppSidebar() {
 
   const menuItems = [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "Simulations", url: "/simulations", icon: Activity },
     { title: "Products", url: "/products", icon: BookCheck },
     { title: "Ingredients", url: "/ingredients", icon: Clipboard },
     { title: "Documents", url: "/documents", icon: FileCheck },
