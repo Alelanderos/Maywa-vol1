@@ -33,6 +33,7 @@ export function AppSidebar() {
   const menuItems = [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
     { title: "Simulations", url: "/simulations", icon: Activity },
+    { title: "Virutal lab", url: "/Virtual lab", icon: Flask },
     { title: "Products", url: "/products", icon: BookCheck },
     { title: "Ingredients", url: "/ingredients", icon: Clipboard },
     { title: "Documents", url: "/documents", icon: FileCheck },
