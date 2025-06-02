@@ -2,13 +2,16 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ComplianceDashboard from "@/components/ComplianceDashboard";
-import { BookOpen, FileCheck, Clipboard, Calendar } from "lucide-react";
+import { LayoutDashboard, FileCheck, Clipboard, Calendar, TrendingUp, AlertTriangle, CheckCircle } from "lucide-react";
 
 const Dashboard = () => {
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
+        <div className="flex items-center gap-3">
+          <LayoutDashboard className="h-8 w-8 text-purple-600" />
+          <h1 className="text-3xl font-bold text-gray-800">Dashboard</h1>
+        </div>
         <Button className="bg-purple-600 hover:bg-purple-700">New Product</Button>
       </div>
       
@@ -17,8 +20,9 @@ const Dashboard = () => {
           title="Products"
           value="8"
           description="Total registered products"
-          icon={<BookOpen className="h-6 w-6" />}
+          icon={<Clipboard className="h-6 w-6" />}
           color="bg-purple-100 text-purple-800"
+          trend="+2 this month"
         />
         <DashboardCard
           title="Documents"
@@ -26,20 +30,23 @@ const Dashboard = () => {
           description="Regulatory documents"
           icon={<FileCheck className="h-6 w-6" />}
           color="bg-blue-100 text-blue-800"
+          trend="3 pending review"
         />
         <DashboardCard
-          title="Ingredients"
-          value="46"
-          description="Registered ingredients"
-          icon={<Clipboard className="h-6 w-6" />}
+          title="Compliance Rate"
+          value="85%"
+          description="Overall compliance"
+          icon={<CheckCircle className="h-6 w-6" />}
           color="bg-green-100 text-green-800"
+          trend="+5% from last month"
         />
         <DashboardCard
-          title="Upcoming"
+          title="Upcoming Tasks"
           value="3"
           description="Tasks due this week"
           icon={<Calendar className="h-6 w-6" />}
           color="bg-yellow-100 text-yellow-800"
+          trend="2 high priority"
         />
       </div>
       
@@ -50,7 +57,10 @@ const Dashboard = () => {
       <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
         <Card>
           <CardHeader>
-            <CardTitle>Compliance Alerts</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-red-500" />
+              Compliance Alerts
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <ul className="space-y-3">
@@ -72,18 +82,25 @@ const Dashboard = () => {
         
         <Card className="md:col-span-2">
           <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-blue-500" />
+              Recent Activity
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {[
-                { time: "Today, 10:30 AM", text: "Updated product 'Vital Supplement' ingredients" },
-                { time: "Yesterday", text: "Generated NOM-051 document for 'Skin Repair Cream'" },
-                { time: "2 days ago", text: "Added new ingredient 'Hyaluronic Acid' to database" },
-                { time: "1 week ago", text: "Completed HACCP protocol for 'Protein Blend'" },
+                { time: "Today, 10:30 AM", text: "Updated product 'Vital Supplement' ingredients", type: "update" },
+                { time: "Yesterday", text: "Generated NOM-051 document for 'Skin Repair Cream'", type: "document" },
+                { time: "2 days ago", text: "Added new ingredient 'Hyaluronic Acid' to database", type: "create" },
+                { time: "1 week ago", text: "Completed HACCP protocol for 'Protein Blend'", type: "complete" },
               ].map((item, i) => (
                 <div key={i} className="flex items-start">
-                  <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 mr-3"></div>
+                  <div className={`w-2 h-2 rounded-full mt-2 mr-3 ${
+                    item.type === 'complete' ? 'bg-green-400' :
+                    item.type === 'create' ? 'bg-blue-400' :
+                    item.type === 'document' ? 'bg-purple-400' : 'bg-yellow-400'
+                  }`}></div>
                   <div>
                     <p className="font-medium text-sm">{item.text}</p>
                     <p className="text-xs text-gray-500">{item.time}</p>
@@ -104,16 +121,20 @@ interface DashboardCardProps {
   description: string;
   icon: React.ReactNode;
   color: string;
+  trend?: string;
 }
 
-const DashboardCard = ({ title, value, description, icon, color }: DashboardCardProps) => (
-  <Card>
+const DashboardCard = ({ title, value, description, icon, color, trend }: DashboardCardProps) => (
+  <Card className="hover:shadow-md transition-shadow">
     <CardContent className="p-6">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-gray-500">{title}</p>
           <p className="text-3xl font-bold mt-1">{value}</p>
           <p className="text-xs text-gray-500 mt-1">{description}</p>
+          {trend && (
+            <p className="text-xs text-blue-600 mt-1 font-medium">{trend}</p>
+          )}
         </div>
         <div className={`p-3 rounded-full ${color}`}>
           {icon}

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/sidebar";
 
 import { 
-  BookOpen, 
+  LayoutDashboard, 
   Clipboard, 
   FileCheck, 
   Calendar,
@@ -30,7 +30,7 @@ export function AppSidebar() {
   const currentPath = location.pathname;
 
   const menuItems = [
-    { title: "Dashboard", url: "/dashboard", icon: BookOpen },
+    { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
     { title: "Products", url: "/products", icon: BookCheck },
     { title: "Ingredients", url: "/ingredients", icon: Clipboard },
     { title: "Documents", url: "/documents", icon: FileCheck },
@@ -39,11 +39,14 @@ export function AppSidebar() {
     { title: "Quality Plan", url: "/quality", icon: Calendar },
   ];
 
-  const isActive = (path: string) => currentPath === path;
-  const getNavCls = ({ isActive }: { isActive: boolean }) =>
-    isActive 
+  const isActive = (path: string) => currentPath === path || (currentPath === "/" && path === "/dashboard");
+  
+  const getNavClasses = (url: string) => {
+    const active = isActive(url);
+    return active 
       ? "flex items-center w-full px-3 py-2 rounded-md bg-purple-100 text-purple-700 font-medium" 
       : "flex items-center w-full px-3 py-2 rounded-md text-gray-600 hover:bg-muted/50";
+  };
 
   return (
     <Sidebar
@@ -68,7 +71,7 @@ export function AppSidebar() {
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild className="w-full">
-                    <NavLink to={item.url} className={getNavCls}>
+                    <NavLink to={item.url} className={getNavClasses(item.url)}>
                       <item.icon className={`h-5 w-5 ${!isCollapsed ? "mr-3" : ""}`} />
                       {!isCollapsed && <span>{item.title}</span>}
                     </NavLink>
@@ -88,7 +91,7 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="w-full">
-                  <NavLink to="/nom-051" className={getNavCls}>
+                  <NavLink to="/nom-051" className={getNavClasses("/nom-051")}>
                     <BookCheck className={`h-5 w-5 ${!isCollapsed ? "mr-3" : ""}`} />
                     {!isCollapsed && <span>NOM-051</span>}
                   </NavLink>
@@ -97,7 +100,7 @@ export function AppSidebar() {
               
               <SidebarMenuItem>
                 <SidebarMenuButton asChild className="w-full">
-                  <NavLink to="/cofepris" className={getNavCls}>
+                  <NavLink to="/cofepris" className={getNavClasses("/cofepris")}>
                     <CheckSquare className={`h-5 w-5 ${!isCollapsed ? "mr-3" : ""}`} />
                     {!isCollapsed && <span>COFEPRIS</span>}
                   </NavLink>
