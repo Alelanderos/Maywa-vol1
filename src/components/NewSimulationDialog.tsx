@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -29,6 +28,18 @@ interface SimulationData {
   time: number;
 }
 
+interface RunningSimulation {
+  id: string;
+  name: string;
+  status: 'running' | 'completed' | 'failed';
+  progress: number;
+  startTime: Date;
+}
+
+interface NewSimulationDialogProps {
+  onSimulationStart: (simulation: RunningSimulation) => void;
+}
+
 const chartData = [
   { time: 0, temperature: 20, pressure: 1.0 },
   { time: 1, temperature: 25, pressure: 1.2 },
@@ -49,7 +60,7 @@ const chartConfig = {
   },
 };
 
-export function NewSimulationDialog() {
+export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogProps) {
   const [open, setOpen] = useState(false);
   
   const form = useForm<SimulationData>({
@@ -63,7 +74,19 @@ export function NewSimulationDialog() {
 
   const onSubmit = (data: SimulationData) => {
     console.log("Starting simulation with data:", data);
-    // Here you would typically send the data to your simulation service
+    
+    // Create a new running simulation
+    const newSimulation: RunningSimulation = {
+      id: `sim-${Date.now()}`,
+      name: data.name || `Simulation-${Date.now()}`,
+      status: 'running',
+      progress: 0,
+      startTime: new Date(),
+    };
+    
+    // Pass the simulation back to parent
+    onSimulationStart(newSimulation);
+    
     setOpen(false);
     form.reset();
   };

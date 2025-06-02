@@ -1,9 +1,46 @@
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity, Play, TrendingUp, Target, AlertCircle, CheckCircle, Clock, Zap } from "lucide-react";
 import { NewSimulationDialog } from "@/components/NewSimulationDialog";
+import { RunningSimulations } from "@/components/RunningSimulations";
+
+interface RunningSimulation {
+  id: string;
+  name: string;
+  status: 'running' | 'completed' | 'failed';
+  progress: number;
+  startTime: Date;
+}
 
 const Simulations = () => {
+  const [runningSimulations, setRunningSimulations] = useState<RunningSimulation[]>([]);
+
+  const handleSimulationStart = (simulation: RunningSimulation) => {
+    setRunningSimulations(prev => [...prev, simulation]);
+  };
+
+  // Simulate progress updates for running simulations
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRunningSimulations(prev => 
+        prev.map(sim => {
+          if (sim.status === 'running' && sim.progress < 100) {
+            const newProgress = Math.min(sim.progress + Math.random() * 10, 100);
+            return {
+              ...sim,
+              progress: newProgress,
+              status: newProgress >= 100 ? 'completed' : 'running'
+            };
+          }
+          return sim;
+        })
+      );
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
@@ -11,13 +48,13 @@ const Simulations = () => {
           <Activity className="h-8 w-8 text-blue-600" />
           <h1 className="text-3xl font-bold text-gray-800">Simulations</h1>
         </div>
-        <NewSimulationDialog />
+        <NewSimulationDialog onSimulationStart={handleSimulationStart} />
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <SimulationCard
           title="Active Simulations"
-          value="12"
+          value={runningSimulations.filter(sim => sim.status === 'running').length.toString()}
           description="Currently running"
           icon={<Play className="h-6 w-6" />}
           color="bg-blue-100 text-blue-800"
@@ -25,7 +62,7 @@ const Simulations = () => {
         />
         <SimulationCard
           title="Completed"
-          value="47"
+          value={runningSimulations.filter(sim => sim.status === 'completed').length.toString()}
           description="Total completed"
           icon={<CheckCircle className="h-6 w-6" />}
           color="bg-green-100 text-green-800"
@@ -49,7 +86,11 @@ const Simulations = () => {
         />
       </div>
       
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="lg:col-span-2">
+          <RunningSimulations simulations={runningSimulations} />
+        </div>
+        
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -74,8 +115,10 @@ const Simulations = () => {
             </ul>
           </CardContent>
         </Card>
-        
-        <Card className="md:col-span-2">
+      </div>
+      
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Zap className="h-5 w-5 text-green-500" />
@@ -105,9 +148,7 @@ const Simulations = () => {
             </div>
           </CardContent>
         </Card>
-      </div>
-      
-      <div className="mt-8">
+        
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -116,7 +157,7 @@ const Simulations = () => {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-6">
               <div className="text-center">
                 <div className="text-2xl font-bold text-blue-600">156</div>
                 <div className="text-sm text-gray-500">Total Simulations Run</div>
