@@ -15,8 +15,8 @@ interface RunningSimulationsProps {
   simulations: RunningSimulation[];
 }
 
-export function RunningSimulations({ simulations }: RunningSimulationsProps) {
-  if (simulations.length === 0) {
+export function RunningSimulations({ simulations = [] }: RunningSimulationsProps) {
+  if (!simulations || simulations.length === 0) {
     return (
       <Card>
         <CardHeader>
