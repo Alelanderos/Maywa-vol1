@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity, Play, TrendingUp, Target, AlertCircle, CheckCircle, Clock, Zap } from "lucide-react";
 import { NewSimulationDialog } from "@/components/NewSimulationDialog";
 import { RunningSimulations } from "@/components/RunningSimulations";
-import { AnimatedLineChart } from './AnimatedLineChart';
+import { ChartAreaInteractive } from '@/components/AppAreaChart';
 
 interface RunningSimulation {
   id: string;
@@ -52,7 +52,8 @@ const Simulations = () => {
         <NewSimulationDialog onSimulationStart={handleSimulationStart} />
       </div>
       
-      <div  className="grid grid-cols-1" ><AppAreaChart /></div>
+      <div className="grid grid-cols-1"><ChartAreaInteractive /></div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <SimulationCard
           title="Active Simulations"
