@@ -246,15 +246,15 @@ export function ChartAreaInteractive() {
             <Area
               dataKey="mobile"
               type="natural"
-              fill="url(#fillMobile)"
-              stroke="var(--color-mobile)"
+              fill="#4A90E2"
+              stroke="357ABD"
               stackId="a"
             />
             <Area
               dataKey="desktop"
               type="natural"
-              fill="url(#fillDesktop)"
-              stroke="var(--color-desktop)"
+              fill="#E94E77"
+              stroke="v#D63863"
               stackId="a"
             />
             <ChartLegend content={<ChartLegendContent />} />
