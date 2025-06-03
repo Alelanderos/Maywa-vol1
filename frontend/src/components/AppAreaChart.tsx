@@ -154,7 +154,7 @@ export function ChartAreaInteractive() {
   })
 
   return (
-    <Card className="pt-hover:shadow-md transition-shadow">
+    <Card className="pt-0">
       <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>Area Chart - Interactive</CardTitle>
@@ -243,21 +243,20 @@ export function ChartAreaInteractive() {
                 />
               }
             />
-           <Area 
-             dataKey="desktop" 
-             type="natural" 
-             fill="#4A90E2" /* Blue */
-             stroke="#357ABD" /* Darker Blue */
-             stackId="a" 
+            <Area
+              dataKey="mobile"
+              type="natural"
+              fill="#4A90E2"
+              stroke="357ABD"
+              stackId="a"
             />
-           <Area 
-             dataKey="mobile" 
-             type="natural" 
-             fill="#E94E77" /* Pink */
-             stroke="#D63863" /* Darker Pink */
-             stackId="a" 
-             />
-
+            <Area
+              dataKey="desktop"
+              type="natural"
+              fill="#E94E77"
+              stroke="v#D63863"
+              stackId="a"
+            />
             <ChartLegend content={<ChartLegendContent />} />
           </AreaChart>
         </ChartContainer>
