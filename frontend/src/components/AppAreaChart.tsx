@@ -253,7 +253,7 @@ export function ChartAreaInteractive() {
             <Area
               dataKey="desktop"
               type="natural"
-              fill="#F5D7DB"
+              fill="#A3A1FF"
               stroke="v#D63863"
               stackId="a"
             />
