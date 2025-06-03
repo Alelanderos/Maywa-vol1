@@ -257,7 +257,6 @@ export function ChartAreaInteractive() {
               stroke="#A3A1FF"
               fill="#F5D7DB"
               stroke="#D63863"
-
               stackId="a"
             />
             <ChartLegend content={<ChartLegendContent />} />
