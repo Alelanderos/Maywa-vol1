@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity, Play, TrendingUp, Target, AlertCircle, CheckCircle, Clock, Zap } from "lucide-react";
 import { NewSimulationDialog } from "@/components/NewSimulationDialog";
 import { RunningSimulations } from "@/components/RunningSimulations";
+import { AnimatedLineChart } from './AnimatedLineChart';
 
 interface RunningSimulation {
   id: string;
