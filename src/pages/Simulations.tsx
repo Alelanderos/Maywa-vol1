@@ -5,6 +5,7 @@ import { Activity, Play, TrendingUp, Target, AlertCircle, CheckCircle, Clock, Za
 import { NewSimulationDialog } from "@/components/NewSimulationDialog";
 import { RunningSimulations } from "@/components/RunningSimulations";
 import { ChartAreaInteractive } from '@/components/AppAreaChart';
+import {AnimatedLineChart} from '@/components/AnimatedLineChart'
 
 interface RunningSimulation {
   id: string;
@@ -89,6 +90,8 @@ const Simulations = () => {
         />
       </div>
       
+      <div className="grid grid-cols-1"><ChartAreaInteractive /></div>
+
       <div className="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-4">
         <div className="lg:col-span-2">
           <RunningSimulations simulations={runningSimulations} />
