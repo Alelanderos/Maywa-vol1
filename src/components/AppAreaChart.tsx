@@ -189,7 +189,7 @@ export function ChartAreaInteractive() {
         >
           <AreaChart data={filteredData}>
             <defs>
-              <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="0">
+              <linearGradient id="fillDesktop" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
                   stopColor="var(--color-desktop)"
@@ -201,7 +201,7 @@ export function ChartAreaInteractive() {
                   stopOpacity={0.1}
                 />
               </linearGradient>
-              <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="0">
+              <linearGradient id="fillMobile" x1="0" y1="0" x2="0" y2="1">
                 <stop
                   offset="5%"
                   stopColor="var(--color-mobile)"
