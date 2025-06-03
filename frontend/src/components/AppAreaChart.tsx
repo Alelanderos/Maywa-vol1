@@ -255,13 +255,9 @@ export function ChartAreaInteractive() {
               type="natural"
               fill="#A3A1FF"
               stroke="#A3A1FF"
-<<<<<<< HEAD
-
-=======
->>>>>>> bfbd3e7e402bff4618434435a683409677a1ce79
               fill="#F5D7DB"
               stroke="#D63863"
->>>>>>> ebb964fef8c312edb278de9095bfc33afe3da307
+
               stackId="a"
             />
             <ChartLegend content={<ChartLegendContent />} />
