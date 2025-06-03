@@ -243,20 +243,21 @@ export function ChartAreaInteractive() {
                 />
               }
             />
-            <Area
-              dataKey="mobile"
-              type="natural"
-              fill="#4A90E2"
-              stroke="357ABD"
-              stackId="a"
+           <Area 
+             dataKey="desktop" 
+             type="natural" 
+             fill="#4A90E2" /* Blue */
+             stroke="#357ABD" /* Darker Blue */
+             stackId="a" 
             />
-            <Area
-              dataKey="desktop"
-              type="natural"
-              fill="#F5D7DB"
-              stroke="#D63863"
-              stackId="a"
-            />
+           <Area 
+             dataKey="mobile" 
+             type="natural" 
+             fill="#E94E77" /* Pink */
+             stroke="#D63863" /* Darker Pink */
+             stackId="a" 
+             />
+
             <ChartLegend content={<ChartLegendContent />} />
           </AreaChart>
         </ChartContainer>
