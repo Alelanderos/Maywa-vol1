@@ -52,6 +52,7 @@ const Simulations = () => {
         <NewSimulationDialog onSimulationStart={handleSimulationStart} />
       </div>
       
+      <div><AnimatedLineChart /></div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <SimulationCard
           title="Active Simulations"
