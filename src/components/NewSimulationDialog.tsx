@@ -167,7 +167,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
 
                 <FormField
                   control={form.control}
-                  name="pressure"
+                  name="biomasa"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Biomasa Inicial </FormLabel>
@@ -228,7 +228,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="time" />
                   <YAxis yAxisId="temp" orientation="left" />
-                  <YAxis yAxisId="pressure" orientation="right" />
+                  <YAxis yAxisId="biomasa" orientation="right" />
                   <ChartTooltip content={<ChartTooltipContent />} />
                   <Line 
                     yAxisId="temp"
@@ -239,12 +239,12 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                     name="Temperature"
                   />
                   <Line 
-                    yAxisId="pressure"
+                    yAxisId="biomasa"
                     type="monotone" 
-                    dataKey="pressure" 
-                    stroke="var(--color-pressure)" 
+                    dataKey="biomasa" 
+                    stroke="var(--color-biomasa)" 
                     strokeWidth={2}
-                    name="Pressure"
+                    name="Biomasa"
                   />
                 </LineChart>
               </ResponsiveContainer>
