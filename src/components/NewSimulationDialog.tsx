@@ -24,7 +24,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 interface SimulationData {
   name: string;
   temperature: number;
-  pressure: number;
+  biomasa: number;
   time: number;
 }
 
@@ -41,12 +41,12 @@ interface NewSimulationDialogProps {
 }
 
 const chartData = [
-  { time: 0, temperature: 20, pressure: 1.0 },
-  { time: 1, temperature: 25, pressure: 1.2 },
-  { time: 2, temperature: 30, pressure: 1.5 },
-  { time: 3, temperature: 35, pressure: 1.8 },
-  { time: 4, temperature: 40, pressure: 2.1 },
-  { time: 5, temperature: 45, pressure: 2.4 },
+  { time: 0, temperature: 20, biomasa: 0.0 },
+  { time: 1, temperature: 25, biomasa: 0.1 },
+  { time: 2, temperature: 30, biomasa: 0.2 },
+  { time: 3, temperature: 35, biomasa: 0.3 },
+  { time: 4, temperature: 40, biomasa: 0.4 },
+  { time: 5, temperature: 45, biomasa: 0.5 },
 ];
 
 const chartConfig = {
@@ -58,7 +58,7 @@ const chartConfig = {
     label: "pH ",
     color: "#3b82f6",
   },
-  pressure: {
+  biomasa: {
     label: "Biomasa Inicial",
     color: "#ef4444",
   },
@@ -72,7 +72,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
     defaultValues: {
       name: "",
       temperature: 25,
-      pressure: 1.0,
+      biomasa: 1.0,
       time: 60,
     },
   });
