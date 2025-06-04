@@ -55,7 +55,7 @@ const chartConfig = {
     color: "#3b82f6",
   },
   pressure: {
-    label: "Concentracion ",
+    label: "Concentracion",
     color: "#ef4444",
   },
 };
@@ -220,7 +220,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                     dataKey="pressure" 
                     stroke="var(--color-pressure)" 
                     strokeWidth={2}
-                    name="Pressure"
+                    name="Concentracion"
                   />
                 </LineChart>
               </ResponsiveContainer>
