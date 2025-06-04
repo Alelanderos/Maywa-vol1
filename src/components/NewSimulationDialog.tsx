@@ -51,7 +51,7 @@ const chartData = [
 
 const chartConfig = {
   temperature: {
-    label: "Temperature (°C)",
+    label: "Temperatura (°C)",
     color: "#3b82f6",
   },
   pressure: {
@@ -127,7 +127,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                   name="temperature"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Temperature (°C)</FormLabel>
+                      <FormLabel>Temperatura (°C)</FormLabel>
                       <FormControl>
                         <Input 
                           type="number" 
