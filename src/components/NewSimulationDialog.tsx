@@ -146,7 +146,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                   name="pressure"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Concentracion </FormLabel>
+                      <FormLabel>Biomasa Inicial </FormLabel>
                       <FormControl>
                         <Input 
                           type="number" 
