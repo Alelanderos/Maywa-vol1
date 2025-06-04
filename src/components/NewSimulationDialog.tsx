@@ -41,12 +41,12 @@ interface NewSimulationDialogProps {
 }
 
 const chartData = [
-  { time: 0, temperature: 20, pressure: 1.0 },
-  { time: 1, temperature: 25, pressure: 1.2 },
-  { time: 2, temperature: 30, pressure: 1.5 },
-  { time: 3, temperature: 35, pressure: 1.8 },
-  { time: 4, temperature: 40, pressure: 2.1 },
-  { time: 5, temperature: 45, pressure: 2.4 },
+  { time: 0, temperature: 20, ph: 1.0 },
+  { time: 1, temperature: 25, ph: 1.2 },
+  { time: 2, temperature: 30, ph: 1.5 },
+  { time: 3, temperature: 35, ph: 1.8 },
+  { time: 4, temperature: 40, ph: 2.1 },
+  { time: 5, temperature: 45, ph: 2.4 },
 ];
 
 const chartConfig = {
@@ -237,6 +237,14 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                     stroke="var(--color-temperature)" 
                     strokeWidth={2}
                     name="Temperature"
+                  />
+                   <Line 
+                    yAxisId="ph"
+                    type="monotone" 
+                    dataKey="pH" 
+                    stroke="var(--color-pH)" 
+                    strokeWidth={2}
+                    name="pH"
                   />
                   <Line 
                     yAxisId="pressure"
