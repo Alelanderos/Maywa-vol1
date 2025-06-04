@@ -139,8 +139,8 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                       <FormControl>
                         <Input 
                           type="number" 
-                          step="0.1"
-                          placeholder="1.0" 
+                          step="1.0"
+                          placeholder="0.0" 
                           {...field}
                           onChange={(e) => field.onChange(Number(e.target.value))}
                         />
@@ -159,8 +159,8 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                       <FormControl>
                         <Input 
                           type="number" 
-                          step="0.1"
-                          placeholder="1.0" 
+                          step="1.0"
+                          placeholder="0.0" 
                           {...field}
                           onChange={(e) => field.onChange(Number(e.target.value))}
                         />
@@ -179,8 +179,8 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                       <FormControl>
                         <Input 
                           type="number" 
-                          step="0.1"
-                          placeholder="1.0" 
+                          step="1.0"
+                          placeholder="0.0" 
                           {...field}
                           onChange={(e) => field.onChange(Number(e.target.value))}
                         />      
@@ -238,7 +238,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                       <FormControl>
                         <Input 
                           type="number" 
-                          placeholder="60" 
+                          placeholder="24" 
                           {...field}
                           onChange={(e) => field.onChange(Number(e.target.value))}
                         />
