@@ -151,7 +151,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                   name="pH"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Temperatura (°C)</FormLabel>
+                      <FormLabel>pH </FormLabel>
                       <FormControl>
                         <Input 
                           type="number" 
