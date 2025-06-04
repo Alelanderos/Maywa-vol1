@@ -22,17 +22,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<AppLayout><Dashboard /></AppLayout>} />
           <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
-          <Route path="/simulations" element={<AppLayout><Simulations /></AppLayout>} />
-          <Route path="/virtual lab" element={<AppLayout><div className="p-6">Virutal lab Page (Coming Soon)</div></AppLayout>} />
-          <Route path="/products" element={<AppLayout><Products /></AppLayout>} />
-          <Route path="/products/:id" element={<AppLayout><ProductView /></AppLayout>} />
-          <Route path="/ingredients" element={<AppLayout><div className="p-6">Ingredients Page (Coming Soon)</div></AppLayout>} />
-          <Route path="/documents" element={<AppLayout><div className="p-6">Documents Page (Coming Soon)</div></AppLayout>} />
-          <Route path="/tasks" element={<AppLayout><div className="p-6">Tasks Page (Coming Soon)</div></AppLayout>} />
-          <Route path="/haccp" element={<AppLayout><div className="p-6">HACCP Protocol Page (Coming Soon)</div></AppLayout>} />
-          <Route path="/quality" element={<AppLayout><div className="p-6">Quality Plan Page (Coming Soon)</div></AppLayout>} />
-          <Route path="/nom-051" element={<AppLayout><div className="p-6">NOM-051 Page (Coming Soon)</div></AppLayout>} />
-          <Route path="/cofepris" element={<AppLayout><div className="p-6">COFEPRIS Page (Coming Soon)</div></AppLayout>} />
+          <Route path="/simulations" element={<AppLayout><Simulations /></AppLayout>} /> 
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
