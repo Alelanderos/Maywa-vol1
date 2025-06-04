@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'data',
     'corsheaders'
     'rest_framework',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -86,6 +87,8 @@ DATABASES = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
 ]
+
+ASGI_APPLICATION = 'Maywa.asgi.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

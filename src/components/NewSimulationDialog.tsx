@@ -1,26 +1,13 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
+
 
 interface SimulationData {
   name: string;
@@ -44,14 +31,7 @@ interface NewSimulationDialogProps {
   onSimulationStart: (simulation: RunningSimulation) => void;
 }
 
-const chartData = [
-  { time: 0, temperature: 20, biomasa: 0.0 },
-  { time: 1, temperature: 25, biomasa: 0.1 },
-  { time: 2, temperature: 30, biomasa: 0.2 },
-  { time: 3, temperature: 35, biomasa: 0.3 },
-  { time: 4, temperature: 40, biomasa: 0.4 },
-  { time: 5, temperature: 45, biomasa: 0.5 },
-];
+const [chartData, setChartData] = useState<SimulationData[]>([]);
 
 const chartConfig = {
   temperature: {
@@ -80,24 +60,29 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
     },
   });
 
-  const onSubmit = (data: SimulationData) => {
-    console.log("Starting simulation with data:", data);
-    
-    // Create a new running simulation
-    const newSimulation: RunningSimulation = {
-      id: `sim-${Date.now()}`,
-      name: data.name || `Simulation-${Date.now()}`,
-      status: 'running',
-      progress: 0,
-      startTime: new Date(),
-    };
-    
-    // Pass the simulation back to parent
-    onSimulationStart(newSimulation);
-    
-    setOpen(false);
-    form.reset();
-  };
+const onSubmit = async (data: SimulationData) => {
+    try {
+        const response = await fetch('http://localhost:8000/api/simulate/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const simulationResults = await response.json();
+        setChartData(simulationResults);
+        setOpen(false);
+        form.reset();
+    } catch (error) {
+        console.error('Error during simulation:', error);
+    }
+};
+
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -266,34 +251,21 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
           
           <div className="space-y-4">
             <h3 className="text-lg font-semibold">Expected Results Preview</h3>
-            <ChartContainer config={chartConfig} className="h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
+            <ChartContainer config={chartConfig} className="h-[500px]">
+            <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="time" />
-                  <YAxis yAxisId="temp" orientation="left" />
-                  <YAxis yAxisId="biomasa" orientation="right" />
-                  <ChartTooltip content={<ChartTooltipContent />} />
-                  <Line 
-                    yAxisId="temp"
-                    type="monotone" 
-                    dataKey="temperature" 
-                    stroke="var(--color-temperature)" 
-                    strokeWidth={2}
-                    name="Temperature"
-                  />
-                  <Line 
-                    yAxisId="biomasa"
-                    type="monotone" 
-                    dataKey="biomasa" 
-                    stroke="var(--color-biomasa)" 
-                    strokeWidth={2}
-                    name="Biomasa"
-                  />
-                </LineChart>
-              </ResponsiveContainer>
+                   <CartesianGrid strokeDasharray="3 3" />
+                   <XAxis dataKey="time" />
+                   <YAxis />
+                   <Tooltip />
+                   <Legend />
+                   <Line type="monotone" dataKey="biomasa" stroke="#8884d8" />
+                   <Line type="monotone" dataKey="sustrato" stroke="#82ca9d" />
+                   <Line type="monotone" dataKey="nitrogeno" stroke="#ffc658" />
+                   <Line type="monotone" dataKey="producto" stroke="#ff7300" />
+                   </LineChart>
+            </ResponsiveContainer>
             </ChartContainer>
-            
           </div>
         </div>
       </DialogContent>
