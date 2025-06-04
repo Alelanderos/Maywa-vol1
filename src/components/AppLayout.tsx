@@ -5,6 +5,14 @@ import AppSidebar from "./AppSidebar";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ModeToggle } from "./ThemeToggle";
 
+const currentBranch = import.meta.env.VITE_GIT_BRANCH;
+
+return (
+  <div className="text-sm text-gray-500">
+    Current Git Branch: {currentBranch}
+  </div>
+);
+
 interface AppLayoutProps {
   children: ReactNode;
 }
