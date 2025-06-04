@@ -55,7 +55,7 @@ const chartConfig = {
     color: "#3b82f6",
   },
   pressure: {
-    label: "Pressure (bar)",
+    label: "Concentracion ",
     color: "#ef4444",
   },
 };
