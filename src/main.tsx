@@ -7,7 +7,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Router>
         <React.StrictMode>
          <App />
-        </React.StrictMode>
+        </React.StrictMode>,
     </Router>
     );
  
