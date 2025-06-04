@@ -26,6 +26,8 @@ interface SimulationData {
   name: string;
   temperature: number;
   pH: number;
+  sustrato: number;
+  nitrogeno: number;
   biomasa: number;
   time: number;
 }
@@ -56,10 +58,6 @@ const chartConfig = {
     label: "Temperatura (°C)",
     color: "#3b82f6",
   },
-   pH: {
-    label: "pH ",
-    color: "#3b82f6",
-  },
   biomasa: {
     label: "Biomasa Inicial",
     color: "#ef4444",
@@ -75,8 +73,10 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
       name: "",
       temperature: 25,
       pH: 7,
-      biomasa: 1.0,
-      time: 60,
+      sustrato: 0,
+      biomasa: 0,
+      nitrogeno: 0,
+      time: 24,
     },
   });
 
@@ -132,6 +132,66 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                 
                 <FormField
                   control={form.control}
+                  name="biomasa"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Biomasa Inicial </FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="number" 
+                          step="0.1"
+                          placeholder="1.0" 
+                          {...field}
+                          onChange={(e) => field.onChange(Number(e.target.value))}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="sustrato"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Sustrato Inicial </FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="number" 
+                          step="0.1"
+                          placeholder="1.0" 
+                          {...field}
+                          onChange={(e) => field.onChange(Number(e.target.value))}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="nitrogeno"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Nitrogeno Inicial </FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="number" 
+                          step="0.1"
+                          placeholder="1.0" 
+                          {...field}
+                          onChange={(e) => field.onChange(Number(e.target.value))}
+                        />      
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
                   name="temperature"
                   render={({ field }) => (
                     <FormItem>
@@ -149,6 +209,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                   )}
                 />
                 
+
                 <FormField
                   control={form.control}
                   name="pH"
@@ -167,33 +228,13 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                     </FormItem>
                   )}
                 />
-
-                <FormField
-                  control={form.control}
-                  name="biomasa"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Biomasa Inicial </FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="number" 
-                          step="0.1"
-                          placeholder="1.0" 
-                          {...field}
-                          onChange={(e) => field.onChange(Number(e.target.value))}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
                 
                 <FormField
                   control={form.control}
                   name="time"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Duration (minutes)</FormLabel>
+                      <FormLabel>Duracion (horas)</FormLabel>
                       <FormControl>
                         <Input 
                           type="number" 
