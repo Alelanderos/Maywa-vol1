@@ -76,35 +76,7 @@ export function AppSidebar() {
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>
-        
-        <SidebarGroup>
-          <SidebarGroupLabel className="text-xs uppercase font-semibold text-gray-500 px-3 py-2">
-            {!isCollapsed && "Regulatory"}
-          </SidebarGroupLabel>
-          
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild className="w-full">
-                  <NavLink to="/nom-051" className={getNavClasses("/nom-051")}>
-                    <BookCheck className={`h-5 w-5 ${!isCollapsed ? "mr-3" : ""}`} />
-                    {!isCollapsed && <span>NOM-051</span>}
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-              
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild className="w-full">
-                  <NavLink to="/cofepris" className={getNavClasses("/cofepris")}>
-                    <CheckSquare className={`h-5 w-5 ${!isCollapsed ? "mr-3" : ""}`} />
-                    {!isCollapsed && <span>COFEPRIS</span>}
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup>   
       </SidebarContent>
     </Sidebar>
   );
