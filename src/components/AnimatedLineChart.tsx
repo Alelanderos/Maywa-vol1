@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { DataPoint } from './Dashboard';
+import { DataPoint } from '../types';
 
 interface AnimatedLineChartProps {
   data: DataPoint[];

@@ -247,14 +247,14 @@ export function ChartAreaInteractive() {
               dataKey="mobile"
               type="natural"
               fill="#4A90E2"
-              stroke="357ABD"
+              stroke="#357ABD"
               stackId="a"
             />
             <Area
               dataKey="desktop"
               type="natural"
               fill="#E94E77"
-              stroke="v#D63863"
+              stroke="#D63863"
               stackId="a"
             />
             <ChartLegend content={<ChartLegendContent />} />

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,6 +25,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 interface SimulationData {
   name: string;
   temperature: number;
+  pH: number;
   biomasa: number;
   time: number;
 }
@@ -72,6 +74,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
     defaultValues: {
       name: "",
       temperature: 25,
+      pH: 7,
       biomasa: 1.0,
       time: 60,
     },
@@ -155,7 +158,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                       <FormControl>
                         <Input 
                           type="number" 
-                          placeholder="25" 
+                          placeholder="7" 
                           {...field}
                           onChange={(e) => field.onChange(Number(e.target.value))}
                         />
