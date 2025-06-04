@@ -83,9 +83,7 @@ DATABASES = {
     }
 }
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8080",
-]
+CORS_ALLOWED_ORIGINS = True
 
 
 # Password validation
