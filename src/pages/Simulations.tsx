@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -5,6 +6,7 @@ import { Activity, Play, TrendingUp, Target, AlertCircle, CheckCircle, Clock, Za
 import { NewSimulationDialog } from "@/components/NewSimulationDialog";
 import { RunningSimulations } from "@/components/RunningSimulations";
 import { ChartAreaInteractive } from '@/components/AppAreaChart';
+import { EnvironmentalVariables } from '@/components/EnvironmentalVariables';
 import {AnimatedLineChart} from '@/components/AnimatedLineChart'
 
 interface RunningSimulation {
@@ -54,6 +56,8 @@ const Simulations = () => {
       </div>
       
       <div className="grid grid-cols-1"><ChartAreaInteractive /></div>
+      
+      <EnvironmentalVariables />
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <SimulationCard
