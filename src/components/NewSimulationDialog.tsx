@@ -294,16 +294,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
               </ResponsiveContainer>
             </ChartContainer>
             
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div className="p-3 bg-blue-50 rounded-lg">
-                <div className="font-medium text-blue-800">Estimated Duration</div>
-                <div className="text-2xl font-bold text-blue-600">2.4h</div>
-              </div>
-              <div className="p-3 bg-green-50 rounded-lg">
-                <div className="font-medium text-green-800">Success Rate</div>
-                <div className="text-2xl font-bold text-green-600">94%</div>
-              </div>
-            </div>
+
           </div>
         </div>
       </DialogContent>
