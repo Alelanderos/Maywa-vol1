@@ -155,7 +155,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                       <FormControl>
                         <Input 
                           type="number" 
-                          placeholder="25" 
+                          placeholder="7" 
                           {...field}
                           onChange={(e) => field.onChange(Number(e.target.value))}
                         />
