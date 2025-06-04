@@ -20,6 +20,5 @@ from .views import simulate_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('data.urls')),
-    path("api/simulate/", simulate_view, name="simulate"),
+    path('', include('simulator.urls')),
 ]
