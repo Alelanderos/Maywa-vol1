@@ -146,7 +146,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                   name="pressure"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Pressure (bar)</FormLabel>
+                      <FormLabel>Concentración </FormLabel>
                       <FormControl>
                         <Input 
                           type="number" 
@@ -220,7 +220,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                     dataKey="pressure" 
                     stroke="var(--color-pressure)" 
                     strokeWidth={2}
-                    name="Concentracion"
+                    name="Pressure"
                   />
                 </LineChart>
               </ResponsiveContainer>
