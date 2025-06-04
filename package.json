@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "predev": "node scripts/set-branch-env.js",
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview"
