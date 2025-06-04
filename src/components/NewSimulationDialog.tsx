@@ -54,10 +54,15 @@ const chartConfig = {
     label: "Temperatura (°C)",
     color: "#3b82f6",
   },
+   pH: {
+    label: "pH ",
+    color: "#3b82f6",
+  },
   pressure: {
     label: "Biomasa Inicial",
     color: "#ef4444",
   },
+
 };
 
 export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogProps) {
@@ -141,6 +146,25 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                   )}
                 />
                 
+                <FormField
+                  control={form.control}
+                  name="pH"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>pH </FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="number" 
+                          placeholder="25" 
+                          {...field}
+                          onChange={(e) => field.onChange(Number(e.target.value))}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 <FormField
                   control={form.control}
                   name="pressure"
