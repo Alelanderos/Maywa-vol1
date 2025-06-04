@@ -62,7 +62,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
 
 const onSubmit = async (data: SimulationData) => {
     try {
-        const response = await fetch('http://localhost:8000/api/simulate/', {
+        const response = await fetch('http://localhost:8080/api/simulate/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
