@@ -294,7 +294,6 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
               </ResponsiveContainer>
             </ChartContainer>
             
-
           </div>
         </div>
       </DialogContent>
