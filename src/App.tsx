@@ -13,6 +13,10 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+const branch = import.meta.env.VITE_GIT_BRANCH;
+
+return <div>Current Git Branch: {branch}</div>;
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
