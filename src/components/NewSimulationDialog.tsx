@@ -55,7 +55,7 @@ const chartConfig = {
     color: "#3b82f6",
   },
   pressure: {
-    label: "Concentracion",
+    label: "Biomasa Inicial",
     color: "#ef4444",
   },
 };
