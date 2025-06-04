@@ -24,7 +24,7 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 interface SimulationData {
   name: string;
   temperature: number;
-  pressure: number;
+  ph: number;
   time: number;
 }
 
@@ -72,7 +72,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
     defaultValues: {
       name: "",
       temperature: 25,
-      pressure: 1.0,
+      ph: 1.0,
       time: 60,
     },
   });
@@ -229,6 +229,7 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
                   <XAxis dataKey="time" />
                   <YAxis yAxisId="temp" orientation="left" />
                   <YAxis yAxisId="pressure" orientation="right" />
+                  <YAxis yAxisId="pH" orientation="right" />
                   <ChartTooltip content={<ChartTooltipContent />} />
                   <Line 
                     yAxisId="temp"
