@@ -135,12 +135,11 @@ const onSubmit = async (data: SimulationData) => {
                 <LineChart data={chartData}>
                    <CartesianGrid strokeDasharray="3 3" />
                    <XAxis dataKey="time" />
-                   <YAxis />
-                   <Tooltip />
-                   <Line type="monotone" dataKey="biomasa" stroke="#8884d8" />
-                   <Line type="monotone" dataKey="sustrato" stroke="#82ca9d" />
-                   <Line type="monotone" dataKey="nitrogeno" stroke="#ffc658" />
-                   <Line type="monotone" dataKey="producto" stroke="#ff7300" />
+                   <YAxis yAxisId="temp" orientation="left" />
+                   <YAxis yAxisId="biomasa" orientation="right" />
+                   <ChartTooltip content={<ChartTooltipContent />} />
+                   <Line yAxisId="temp" type="monotone" dataKey="temperature" stroke="#3b82f6" strokeWidth={2} name="Temperature" />
+                   <Line yAxisId="biomasa" type="monotone" dataKey="biomasa" stroke="#ef4444" strokeWidth={2} name="Biomasa" />
                    </LineChart>
             </ResponsiveContainer>
             </ChartContainer>
