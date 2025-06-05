@@ -31,29 +31,6 @@ interface NewSimulationDialogProps {
   onSimulationStart: (simulation: RunningSimulation) => void;
 }
 
-const chartConfig = {
-  temperatura: {
-    label: "Temperatura",
-    color: "#3b82f6",
-  },
-  biomasa: {
-    label: "Biomasa",
-    color: "#ef4444",
-  },
-  sustrato: {
-    label: "Sustrato",
-    color: "#10b981",
-  },
-  nitrogeno: {
-    label: "Nitrógeno",
-    color: "#f59e0b",
-  },
-  pH: {
-    label: "pH",
-    color: "#8b5cf6",
-  },
-};
-
 export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogProps) {
   const [open, setOpen] = useState(false);
   const [chartData, setChartData] = useState<any[]>([]);
@@ -186,23 +163,6 @@ const onSubmit = async (data: SimulationData) => {
                 </div>
               </form>
             </Form>
-          </div>
-          
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Expected Results Preview</h3>
-            <ChartContainer config={chartConfig} className="h-[500px]">
-            <ResponsiveContainer width="100%" height={300}>
-                <LineChart data={chartData}>
-                   <CartesianGrid strokeDasharray="3 3" />
-                   <XAxis dataKey="tiempo" />
-                   <YAxis yAxisId="temp" orientation="left" />
-                   <YAxis yAxisId="biomasa" orientation="right" />
-                   <ChartTooltip content={<ChartTooltipContent />} />
-                   <Line yAxisId="temp" type="monotone" dataKey="temperatura" stroke="#3b82f6" strokeWidth={2} name="Temperatura" />
-                   <Line yAxisId="biomasa" type="monotone" dataKey="biomasa" stroke="#ef4444" strokeWidth={2} name="Biomasa" />
-                   </LineChart>
-            </ResponsiveContainer>
-            </ChartContainer>
           </div>
         </div>
       </DialogContent>
