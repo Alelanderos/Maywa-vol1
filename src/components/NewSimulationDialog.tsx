@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
@@ -60,12 +59,12 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
   const form = useForm<SimulationData>({
     defaultValues: {
       name: "",
-      temperatura: number,
-      pH: number,
-      sustrato: number,
-      biomasa: number,
-      nitrogeno: number,
-      tiempo: number
+      temperatura: 0,
+      pH: 0,
+      sustrato: 0,
+      biomasa: 0,
+      nitrogeno: 0,
+      tiempo: 0
     },
   });
 
