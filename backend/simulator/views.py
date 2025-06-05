@@ -26,12 +26,12 @@ class SimulationView(APIView):
     def post(self, request):
         data = request.data
         # Extract parameters from the request
-        X0 = data.get('biomasa')
+        X0 = data.get('biomasa inicial')
         S_C0 = data.get('sustrato')
         S_N0 = data.get('nitrogeno')
         P0 = 0  # Assuming initial product concentration is 0
-        time_total = data.get('time')
-        Temp = data.get('temperature')
+        time_total = data.get('tiempo')
+        Temp = data.get('temperatura')
         pH = data.get('pH')
 
         # Validate inputs
@@ -80,12 +80,12 @@ class SimulationView(APIView):
         response_data = []
         for i in range(len(solution.t)):
             response_data.append({
-                'time': solution.t[i],
-                'biomasa': solution.y[0][i],
+                'tiempo': solution.t[i],
+                'biomasa inicial': solution.y[0][i],
                 'sustrato': solution.y[1][i],
                 'nitrogeno': solution.y[2][i],
                 'producto': solution.y[3][i],
-                'temperature': Temp,
+                'temperatura': Temp,
                 'pH': pH
             })
 
