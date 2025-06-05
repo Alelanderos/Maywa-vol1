@@ -129,29 +129,55 @@ const onSubmit = async (data: SimulationData) => {
           <div className="space-y-4">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                {['name', 'biomasa', 'sustrato', 'nitrogeno', 'temperatura', 'pH', 'tiempo'].map((field) => (
-                  <FormField
-                     key={field}
-                     control={form.control}
-                     name={field as keyof SimulationData}
-                     render={({ field: innerField }) => (
-                      <FormItem>
-                        <FormLabel>{field.charAt(0).toUpperCase() + field.slice(1)}</FormLabel>
-                        <FormControl>
-                          <Input type={typeof form.getValues()[field] === 'number' ? 'number' : 'text'}
-                                 {...innerField}
-                                 onChange={(e) => innerField.onChange(
-                                   typeof form.getValues()[field] === 'number'
-                                     ? Number(e.target.value)
-                                     : e.target.value
-                                 )} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                ))}
-                
+                <FormField control={form.control} name="name" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl><Input {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="temperature" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Temperature</FormLabel>
+                    <FormControl><Input type="number" {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="pH" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>pH</FormLabel>
+                    <FormControl><Input type="number" {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="sustrato" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sustrato</FormLabel>
+                    <FormControl><Input type="number" {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="nitrogeno" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Nitrogeno</FormLabel>
+                    <FormControl><Input type="number" {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="biomasa" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Biomasa</FormLabel>
+                    <FormControl><Input type="number" {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="time" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Time</FormLabel>
+                    <FormControl><Input type="number" {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
                 <div className="flex gap-2 pt-4">
                   <Button type="submit" className="flex-1">Start Simulation</Button>
                   <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
