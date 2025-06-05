@@ -30,6 +30,29 @@ interface NewSimulationDialogProps {
   onSimulationStart: (simulation: RunningSimulation) => void;
 }
 
+const chartConfig = {
+  temperatura: {
+    label: "Temperatura",
+    color: "#3b82f6",
+  },
+  biomasa: {
+    label: "Biomasa",
+    color: "#ef4444",
+  },
+  sustrato: {
+    label: "Sustrato",
+    color: "#10b981",
+  },
+  nitrogeno: {
+    label: "Nitrógeno",
+    color: "#f59e0b",
+  },
+  pH: {
+    label: "pH",
+    color: "#8b5cf6",
+  },
+};
+
 export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogProps) {
   const [open, setOpen] = useState(false);
   const [chartData, setChartData] = useState<SimulationData[]>([]);
