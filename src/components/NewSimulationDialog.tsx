@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-
+import axios from 'axios'
 
 interface SimulationData {
   name: string;
@@ -31,7 +31,9 @@ interface NewSimulationDialogProps {
   onSimulationStart: (simulation: RunningSimulation) => void;
 }
 
-const [chartData, setChartData] = useState<SimulationData[]>([]);
+export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogProps) {
+  const [open, setOpen] = useState(false);
+  const [chartData, setChartData] = useState([]);
 
 const chartConfig = {
   temperature: {
@@ -44,10 +46,6 @@ const chartConfig = {
   },
 
 };
-
-export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogProps) {
-  const [open, setOpen] = useState(false);
-  
   const form = useForm<SimulationData>({
     defaultValues: {
       name: "",
@@ -60,26 +58,31 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
     },
   });
 
-const onSubmit = async (data: SimulationData) => {
+ const onSubmit = async (data: SimulationData) => {
     try {
-        const response = await fetch('http://localhost:8080/api/simulate/', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify(data),
-        });
+      const response = await axios.post("http://localhost:8000/api/simulate/", data);
+      const result = response.data;
+      const updatedChartData = result.time.map((t: number, i: number) => ({
+        time: t,
+        temperature: result.temperature[i],
+        biomasa: result.biomasa[i],
+      }));
+      setChartData(updatedChartData);
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const simulationResults = await response.json();
-        setChartData(simulationResults);
-        setOpen(false);
-        form.reset();
+      const newSimulation: RunningSimulation = {
+        id: `sim-${Date.now()}`,
+        name: data.name || `Simulation-${Date.now()}`,
+        status: 'completed',
+        progress: 100,
+        startTime: new Date(),
+      };
+      onSimulationStart(newSimulation);
+      setOpen(false);
+      form.reset();
     } catch (error) {
-        console.error('Error during simulation:', error);
+      console.error("Simulation error:", error);
     }
-};
+  };
 
 
   return (
