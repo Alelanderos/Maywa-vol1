@@ -35,17 +35,6 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
   const [open, setOpen] = useState(false);
   const [chartData, setChartData] = useState([]);
 
-const chartConfig = {
-  temperature: {
-    label: "Temperatura (°C)",
-    color: "#3b82f6",
-  },
-  biomasa: {
-    label: "Biomasa Inicial",
-    color: "#ef4444",
-  },
-
-};
   const form = useForm<SimulationData>({
     defaultValues: {
       name: "",
@@ -58,7 +47,7 @@ const chartConfig = {
     },
   });
 
- const onSubmit = async (data: SimulationData) => {
+  const onSubmit = async (data: SimulationData) => {
     try {
       const response = await axios.post("http://localhost:8000/api/simulate/", data);
       const result = response.data;
@@ -84,7 +73,6 @@ const chartConfig = {
     }
   };
 
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -97,175 +85,56 @@ const chartConfig = {
             Configure parameters for your new simulation and preview the expected results.
           </DialogDescription>
         </DialogHeader>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Simulation Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter simulation name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="biomasa"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Biomasa Inicial </FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="number" 
-                          step="1.0"
-                          placeholder="0.0" 
-                          {...field}
-                          onChange={(e) => field.onChange(Number(e.target.value))}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="sustrato"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Sustrato Inicial </FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="number" 
-                          step="1.0"
-                          placeholder="0.0" 
-                          {...field}
-                          onChange={(e) => field.onChange(Number(e.target.value))}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="nitrogeno"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Nitrogeno Inicial </FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="number" 
-                          step="1.0"
-                          placeholder="0.0" 
-                          {...field}
-                          onChange={(e) => field.onChange(Number(e.target.value))}
-                        />      
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="temperature"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Temperatura (°C)</FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="number" 
-                          placeholder="25" 
-                          {...field}
-                          onChange={(e) => field.onChange(Number(e.target.value))}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-
-                <FormField
-                  control={form.control}
-                  name="pH"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>pH </FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="number" 
-                          placeholder="7" 
-                          {...field}
-                          onChange={(e) => field.onChange(Number(e.target.value))}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
-                <FormField
-                  control={form.control}
-                  name="time"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Duracion (horas)</FormLabel>
-                      <FormControl>
-                        <Input 
-                          type="number" 
-                          placeholder="24" 
-                          {...field}
-                          onChange={(e) => field.onChange(Number(e.target.value))}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                
+                {/* Form Fields... */}
+                {['name', 'biomasa', 'sustrato', 'nitrogeno', 'temperature', 'pH', 'time'].map((field) => (
+                  <FormField
+                    key={field}
+                    control={form.control}
+                    name={field as keyof SimulationData}
+                    render={({ field: innerField }) => (
+                      <FormItem>
+                        <FormLabel>{field.charAt(0).toUpperCase() + field.slice(1)}</FormLabel>
+                        <FormControl>
+                          <Input type={typeof form.getValues()[field] === 'number' ? 'number' : 'text'}
+                                 {...innerField}
+                                 onChange={(e) => innerField.onChange(
+                                   typeof form.getValues()[field] === 'number'
+                                     ? Number(e.target.value)
+                                     : e.target.value
+                                 )} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                ))}
                 <div className="flex gap-2 pt-4">
-                  <Button type="submit" className="flex-1">
-                    Start Simulation
-                  </Button>
-                  <Button 
-                    type="button" 
-                    variant="outline" 
-                    onClick={() => setOpen(false)}
-                  >
-                    Cancel
-                  </Button>
+                  <Button type="submit" className="flex-1">Start Simulation</Button>
+                  <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
                 </div>
               </form>
             </Form>
           </div>
-          
+
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Expected Results Preview</h3>
-            <ChartContainer config={chartConfig} className="h-[500px]">
-            <ResponsiveContainer width="100%" height={300}>
+            <h3 className="text-lg font-semibold">Simulation Results Preview</h3>
+            <ChartContainer className="h-[300px]">
+              <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={chartData}>
-                   <CartesianGrid strokeDasharray="3 3" />
-                   <XAxis dataKey="time" />
-                   <YAxis />
-                   <Tooltip />
-                   <Legend />
-                   <Line type="monotone" dataKey="biomasa" stroke="#8884d8" />
-                   <Line type="monotone" dataKey="sustrato" stroke="#82ca9d" />
-                   <Line type="monotone" dataKey="nitrogeno" stroke="#ffc658" />
-                   <Line type="monotone" dataKey="producto" stroke="#ff7300" />
-                   </LineChart>
-            </ResponsiveContainer>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="time" />
+                  <YAxis yAxisId="temp" orientation="left" />
+                  <YAxis yAxisId="biomasa" orientation="right" />
+                  <ChartTooltip content={<ChartTooltipContent />} />
+                  <Line yAxisId="temp" type="monotone" dataKey="temperature" stroke="#3b82f6" strokeWidth={2} name="Temperature" />
+                  <Line yAxisId="biomasa" type="monotone" dataKey="biomasa" stroke="#ef4444" strokeWidth={2} name="Biomasa" />
+                </LineChart>
+              </ResponsiveContainer>
             </ChartContainer>
           </div>
         </div>
