@@ -58,27 +58,44 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
   });
 
 const onSubmit = async (data: SimulationData) => {
-    try {
-        const response = await fetch('http://localhost:8080/api/simulate/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
+  try {
+    const response = await fetch("http://localhost:8000/api/simulate/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const simulationResults = await response.json();
-        setChartData(simulationResults);
-        setOpen(false);
-        form.reset();
-    } catch (error) {
-        console.error('Error during simulation:', error);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
     }
+
+    const result = await response.json();
+    const updatedChartData = result.time.map((t: number, i: number) => ({
+      time: t,
+      temperature: result.temperature[i],
+      biomasa: result.biomasa[i],
+    }));
+
+    setChartData(updatedChartData);
+
+    const newSimulation: RunningSimulation = {
+      id: `sim-${Date.now()}`,
+      name: data.name || `Simulation-${Date.now()}`,
+      status: "completed",
+      progress: 100,
+      startTime: new Date(),
+    };
+
+    onSimulationStart(newSimulation);
+    setOpen(false);
+    form.reset();
+  } catch (error) {
+    console.error("Error during simulation:", error);
+  }
 };
+
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
