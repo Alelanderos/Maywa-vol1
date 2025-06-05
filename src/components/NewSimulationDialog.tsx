@@ -10,12 +10,12 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 
 interface SimulationData {
   name: string;
-  temperature: number;
+  temperatura: number;
   pH: number;
   sustrato: number;
   nitrogeno: number;
   biomasa: number;
-  time: number;
+  tiempo: number;
 }
 
 interface RunningSimulation {
@@ -30,17 +30,6 @@ interface NewSimulationDialogProps {
   onSimulationStart: (simulation: RunningSimulation) => void;
 }
 
-const chartConfig = {
-  temperature: {
-    label: "Temperatura (°C)",
-    color: "#3b82f6",
-  },
-  biomasa: {
-    label: "Biomasa Inicial",
-    color: "#ef4444",
-  },
-};
-
 export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogProps) {
   const [open, setOpen] = useState(false);
   const [chartData, setChartData] = useState<SimulationData[]>([]);
@@ -48,12 +37,12 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
   const form = useForm<SimulationData>({
     defaultValues: {
       name: "",
-      temperature: 25,
-      pH: 7,
-      sustrato: 0,
-      biomasa: 0,
-      nitrogeno: 0,
-      time: 24,
+      temperatura: "",
+      pH: "",
+      sustrato: "",
+      biomasa: "",
+      nitrogeno: "",
+      tiempo: "",
     },
   });
 
@@ -72,10 +61,13 @@ const onSubmit = async (data: SimulationData) => {
     }
 
     const result = await response.json();
-    const updatedChartData = result.time.map((t: number, i: number) => ({
-      time: t,
-      temperature: result.temperature[i],
+    const updatedChartData = result.tiempo.map((t: number, i: number) => ({
+      tiempo: t,
+      temperatura: result.temperatura[i],
       biomasa: result.biomasa[i],
+      sustrato: result.sustrato[i],
+      nitrogeno: result.nitrogeno[i],
+      pH: result.pH[i],
     }));
 
     setChartData(updatedChartData);
@@ -114,7 +106,7 @@ const onSubmit = async (data: SimulationData) => {
           <div className="space-y-4">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                {['name', 'biomasa', 'sustrato', 'nitrogeno', 'temperature', 'pH', 'time'].map((field) => (
+                {['name', 'biomasa', 'sustrato', 'nitrogeno', 'temperatura', 'pH', 'tiempo'].map((field) => (
                   <FormField
                      key={field}
                      control={form.control}
@@ -151,11 +143,11 @@ const onSubmit = async (data: SimulationData) => {
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart data={chartData}>
                    <CartesianGrid strokeDasharray="3 3" />
-                   <XAxis dataKey="time" />
+                   <XAxis dataKey="tiempo" />
                    <YAxis yAxisId="temp" orientation="left" />
                    <YAxis yAxisId="biomasa" orientation="right" />
                    <ChartTooltip content={<ChartTooltipContent />} />
-                   <Line yAxisId="temp" type="monotone" dataKey="temperature" stroke="#3b82f6" strokeWidth={2} name="Temperature" />
+                   <Line yAxisId="temp" type="monotone" dataKey="temperatura" stroke="#3b82f6" strokeWidth={2} name="Temperatura" />
                    <Line yAxisId="biomasa" type="monotone" dataKey="biomasa" stroke="#ef4444" strokeWidth={2} name="Biomasa" />
                    </LineChart>
             </ResponsiveContainer>
