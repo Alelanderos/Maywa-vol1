@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
-
 interface SimulationData {
   name: string;
   temperature: number;
@@ -31,8 +30,6 @@ interface NewSimulationDialogProps {
   onSimulationStart: (simulation: RunningSimulation) => void;
 }
 
-const [chartData, setChartData] = useState<SimulationData[]>([]);
-
 const chartConfig = {
   temperature: {
     label: "Temperatura (°C)",
@@ -42,11 +39,11 @@ const chartConfig = {
     label: "Biomasa Inicial",
     color: "#ef4444",
   },
-
 };
 
 export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogProps) {
   const [open, setOpen] = useState(false);
+  const [chartData, setChartData] = useState<SimulationData[]>([]);
   
   const form = useForm<SimulationData>({
     defaultValues: {
@@ -83,7 +80,6 @@ const onSubmit = async (data: SimulationData) => {
     }
 };
 
-
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -101,7 +97,6 @@ const onSubmit = async (data: SimulationData) => {
           <div className="space-y-4">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                {/* Form Fields... */}
                 {['name', 'biomasa', 'sustrato', 'nitrogeno', 'temperature', 'pH', 'time'].map((field) => (
                   <FormField
                      key={field}
@@ -142,7 +137,6 @@ const onSubmit = async (data: SimulationData) => {
                    <XAxis dataKey="time" />
                    <YAxis />
                    <Tooltip />
-                   <Legend />
                    <Line type="monotone" dataKey="biomasa" stroke="#8884d8" />
                    <Line type="monotone" dataKey="sustrato" stroke="#82ca9d" />
                    <Line type="monotone" dataKey="nitrogeno" stroke="#ffc658" />
