@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, } from "@/components/ui/dialog";
@@ -23,6 +24,7 @@ interface RunningSimulation {
   status: 'running' | 'completed' | 'failed';
   progress: number;
   startTime: Date;
+  chartData?: any[];
 }
 
 interface NewSimulationDialogProps {
@@ -54,7 +56,7 @@ const chartConfig = {
 
 export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogProps) {
   const [open, setOpen] = useState(false);
-  const [chartData, setChartData] = useState<SimulationData[]>([]);
+  const [chartData, setChartData] = useState<any[]>([]);
   
   const form = useForm<SimulationData>({
     defaultValues: {
@@ -83,7 +85,7 @@ const onSubmit = async (data: SimulationData) => {
     }
 
     const result = await response.json();
-    const updatedChartData = result.tiempo.map((t: number, i: number) => ({
+    const simulationChartData = result.tiempo.map((t: number, i: number) => ({
       tiempo: t,
       temperatura: result.temperatura[i],
       biomasa: result.biomasa[i],
@@ -92,7 +94,7 @@ const onSubmit = async (data: SimulationData) => {
       pH: result.pH[i],
     }));
 
-    setChartData(updatedChartData);
+    setChartData(simulationChartData);
 
     const newSimulation: RunningSimulation = {
       id: `sim-${Date.now()}`,
@@ -100,6 +102,7 @@ const onSubmit = async (data: SimulationData) => {
       status: "completed",
       progress: 100,
       startTime: new Date(),
+      chartData: simulationChartData,
     };
 
     onSimulationStart(newSimulation);
@@ -108,10 +111,8 @@ const onSubmit = async (data: SimulationData) => {
   } catch (error) {
     console.error("Error during simulation:", error);
     console.log(form.formState.errors);
-    console.log("Chart data:", updatedChartData);
   }
 };
-
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>

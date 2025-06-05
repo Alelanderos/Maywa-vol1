@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -7,7 +6,7 @@ import { NewSimulationDialog } from "@/components/NewSimulationDialog";
 import { RunningSimulations } from "@/components/RunningSimulations";
 import { ChartAreaInteractive } from '@/components/AppAreaChart';
 import { EnvironmentalVariables } from '@/components/EnvironmentalVariables';
-import {AnimatedLineChart} from '@/components/AnimatedLineChart'
+import { SimulationChart } from '@/components/SimulationChart';
 
 interface RunningSimulation {
   id: string;
@@ -15,6 +14,7 @@ interface RunningSimulation {
   status: 'running' | 'completed' | 'failed';
   progress: number;
   startTime: Date;
+  chartData?: any[];
 }
 
 const Simulations = () => {
@@ -23,6 +23,11 @@ const Simulations = () => {
   const handleSimulationStart = (simulation: RunningSimulation) => {
     setRunningSimulations(prev => [...prev, simulation]);
   };
+
+  // Get the most recent completed simulation with chart data
+  const latestCompletedSimulation = runningSimulations
+    .filter(sim => sim.status === 'completed' && sim.chartData)
+    .sort((a, b) => b.startTime.getTime() - a.startTime.getTime())[0];
 
   // Simulate progress updates for running simulations
   useEffect(() => {
@@ -55,7 +60,16 @@ const Simulations = () => {
         <NewSimulationDialog onSimulationStart={handleSimulationStart} />
       </div>
       
-      <div className="grid grid-cols-1"><ChartAreaInteractive /></div>
+      {latestCompletedSimulation ? (
+        <div className="grid grid-cols-1">
+          <SimulationChart 
+            data={latestCompletedSimulation.chartData || []}
+            title={`Results: ${latestCompletedSimulation.name}`}
+          />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1"><ChartAreaInteractive /></div>
+      )}
       
       <EnvironmentalVariables />
       
