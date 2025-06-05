@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -60,16 +61,16 @@ const Simulations = () => {
         <NewSimulationDialog onSimulationStart={handleSimulationStart} />
       </div>
       
-      {latestCompletedSimulation ? (
-        <div className="grid grid-cols-1">
+      <div className="grid grid-cols-1">
+        {latestCompletedSimulation ? (
           <SimulationChart 
             data={latestCompletedSimulation.chartData || []}
             title={`Results: ${latestCompletedSimulation.name}`}
           />
-        </div>
-      ) : (
-        <div className="grid grid-cols-1"><ChartAreaInteractive /></div>
-      )}
+        ) : (
+          <ChartAreaInteractive />
+        )}
+      </div>
       
       <EnvironmentalVariables />
       
