@@ -60,12 +60,12 @@ export function NewSimulationDialog({ onSimulationStart }: NewSimulationDialogPr
   const form = useForm<SimulationData>({
     defaultValues: {
       name: "",
-      temperatura: "",
-      pH: "",
-      sustrato: "",
-      biomasa: "",
-      nitrogeno: "",
-      tiempo: "",
+      temperatura: number,
+      pH: number,
+      sustrato: number,
+      biomasa: number,
+      nitrogeno: number,
+      tiempo: number
     },
   });
 
@@ -108,6 +108,7 @@ const onSubmit = async (data: SimulationData) => {
     form.reset();
   } catch (error) {
     console.error("Error during simulation:", error);
+    console.log(form.formState.errors);
   }
 };
 
@@ -171,9 +172,9 @@ const onSubmit = async (data: SimulationData) => {
                     <FormMessage />
                   </FormItem>
                 )} />
-                <FormField control={form.control} name="time" render={({ field }) => (
+                <FormField control={form.control} name="tiempo" render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Time</FormLabel>
+                    <FormLabel>Tiempo</FormLabel>
                     <FormControl><Input type="number" {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
