@@ -108,6 +108,7 @@ const onSubmit = async (data: SimulationData) => {
   } catch (error) {
     console.error("Error during simulation:", error);
     console.log(form.formState.errors);
+    console.log("Chart data:", updatedChartData);
   }
 };
 
