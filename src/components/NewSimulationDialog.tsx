@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import axios from 'axios'
+import axios from 'axios';
 
 interface SimulationData {
   name: string;
