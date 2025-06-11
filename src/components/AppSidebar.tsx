@@ -35,7 +35,6 @@ export function AppSidebar() {
     { title: "Simulations", url: "/simulations", icon: Activity },
     { title: "Virutal lab", url: "/virtual lab", icon:    Activity },
     { title: "Products", url: "/products", icon: BookCheck },
-    { title: "Ingredients", url: "/ingredients", icon: Clipboard },
     { title: "Documents", url: "/documents", icon: FileCheck },
     { title: "Tasks", url: "/tasks", icon: ListTodo },
     { title: "HACCP Protocol", url: "/haccp", icon: CheckSquare },

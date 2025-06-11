@@ -26,7 +26,6 @@ const App = () => (
           <Route path="/virtual lab" element={<AppLayout><div className="p-6">Virutal lab Page (Coming Soon)</div></AppLayout>} />
           <Route path="/products" element={<AppLayout><Products /></AppLayout>} />
           <Route path="/products/:id" element={<AppLayout><ProductView /></AppLayout>} />
-          <Route path="/ingredients" element={<AppLayout><div className="p-6">Ingredients Page (Coming Soon)</div></AppLayout>} />
           <Route path="/documents" element={<AppLayout><div className="p-6">Documents Page (Coming Soon)</div></AppLayout>} />
           <Route path="/tasks" element={<AppLayout><div className="p-6">Tasks Page (Coming Soon)</div></AppLayout>} />
           <Route path="/haccp" element={<AppLayout><div className="p-6">HACCP Protocol Page (Coming Soon)</div></AppLayout>} />
